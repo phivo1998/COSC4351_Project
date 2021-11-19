@@ -1,4 +1,3 @@
-import { ExplicitContentFilterLevels } from "discord.js/typings/enums"
 import UsersDAO from "../dao/usersDAO.js"
 
 export default class UsersCrtl{
@@ -9,13 +8,15 @@ export default class UsersCrtl{
         }
 
         const {usersList, totalUsers} = await UsersDAO.getUsers({
-            username
+            filter
         })
 
         let response = {
-            usernames: userList
+            usernames: usersList,
+            total_users:totalUsers,
+            filters:filter
         }
-
+        
         res.json(response)
     }
 }

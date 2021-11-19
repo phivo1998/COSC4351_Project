@@ -1,42 +1,42 @@
-let users
+let tables
 
-export default class UsersDAO {
+export default class TablesDAO {
     static async injectDB(conn) {
-        if(users){
+        if(tables){
             return
         }
         try{
-            users = await conn.db(process.env.ATLAS_DB).collection("users")
-            console.log(`established connections to users`)
+            tables = await conn.db(process.env.ATLAS_DB).collection("tables")
+            console.log(`connection established to tables collections`)
         }catch(e){
-            console.error(`Unable to establish connection in UsersDOA: ${e}`)
+            console.error(`Unable to establish connection in tablesDOA: ${e}`)
         }
     }
 
-    static async getUsers({ 
+    static async getTables({ 
         filters = null,
         
         } = {}){
-          let query 
-          //find usernames
+          let query
+          //find by size
           if (filters) {
-            if("username" in filters){
-              query = {$text: { $search: filters["username"]}}
+            if("size" in filters){
+              query = {$text: { $search: filters["size"]}}
             // }else if("cuisine" in filters){
             //   query = {"cuisine": ($eq: filters["cuisine"])}
             // }
-            }
           }
-        
+        }
+      
         //find
         let cursor
       
         try{
-          cursor = await users 
-          .find(query)
+          cursor = await tables 
+            .find(query)
         }catch(e){
           console.error(`unable to issue find command, ${e}`)
-          return {usersList: [], totalUsers: 0}
+          return {tablesList: [], totalTables: 0}
       
           
         }
@@ -44,17 +44,17 @@ export default class UsersDAO {
         const displayCursor = cursor
       
         try{
-          const usersList = await displayCursor.toArray()
+          const tablesList = await displayCursor.toArray()
          // const userList_1 = await
           cursor.toArray()
-          const totalUsers = await users.countDocuments(query)
+          const totalTables = await tables.countDocuments(query)
       
       
-          return {usersList, totalUsers}
+          return {tablesList, totalTables}
         }catch(e){
           console.error(`unable to convert cursor to arrya or problem counting users, ${e}`)
       
-          return {userList:[], totalUsers:0}
+          return {tablesList:[], totalTables:0}
         }
     }
 }
