@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/pages/SignUp";
 import Login from "./components/pages/login";
-import reservations from "./components/pages/reservation";
+import Dashboard from "./components/pages/dashboard";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Switch>
         <Route path='/login' component={Login} />
         <Route path='/sign-up' component={SignUp} />
-        <Route path='/reservations' component={reservations} />
+        <Route path='/dashboard/:username' component={Dashboard} />
       </Switch>
     </Router>
     </>
