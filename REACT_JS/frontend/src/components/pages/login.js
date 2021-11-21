@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import '../../App.css';
 import './../login.css';
@@ -31,6 +31,7 @@ const Login = () => {
             console.log("Invalid Entry.");
         } else {
             alert("Success");
+            // console.log(username);
             history.push(`/dashboard/${username}`);
         }
 
