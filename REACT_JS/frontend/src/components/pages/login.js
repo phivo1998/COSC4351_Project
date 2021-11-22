@@ -33,28 +33,25 @@ const Login = (props) => {
             const httpResponse = await http.get(`users?email=${username}`)
             console.log(`${JSON.stringify(httpResponse)}`)
             const body = httpResponse
-            console.log(body.data.users[0].password)
-
+            
             if(body.data.total_users === 0 || body.data.users[0].password !== password) {
-                console.log("Invalid Entry.");
+                console.log("Invalid Entry");
                 throw new Error('Invalid Entry')
 
             } else {
-                props.login(username)
+                //props.login(username)
                 alert("Success");
-                props.history.push(`/dashboard/${body.data.users[0].first_name}`);
-                
+                //props.history.push(`/dashboard/${body.data.users[0].first_name}`);
+                history.push(`/dashboard/${body.data.users[0].first_name}`);
             }
 
-            
-            // const response = await fetch(`http://localhost:8000/api/users?email=${username}`, result);
-            // const body = await response.json();
             
             
 
 
         }catch(e){
-            alert(`Invaild username/password`)
+            
+            alert(`Invaild username/password: ${e}`)
             //window.location = '/login'
         }
 
