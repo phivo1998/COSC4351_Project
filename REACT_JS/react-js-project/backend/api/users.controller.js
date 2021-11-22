@@ -2,19 +2,23 @@ import UsersDAO from "../dao/usersDAO.js"
 
 export default class UsersCrtl{
     static async apiGetUsers(req, res, next){
-        let filter = {}
+        let filters = {}
         if(req.query.username){
-            filter.username = req.query.username
+            filters.username = req.query.username
         }
-
+        
+        if(req.query.email){
+            filters.email = req.query.email
+        }
+        
         const {usersList, totalUsers} = await UsersDAO.getUsers({
-            filter
+            filters,
         })
 
         let response = {
-            usernames: usersList,
+            users: usersList,
             total_users:totalUsers,
-            filters:filter
+            filters:filters
         }
         
         res.json(response)
