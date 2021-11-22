@@ -63,7 +63,7 @@ export default class ReservationsDAO{
         }
     }
 
-    static async addReservation(first_name, last_name, phoneNum,
+    static async addReservation(first_name, last_name, phoneNumber,
         email,
         date,
         guestNum){
@@ -73,7 +73,7 @@ export default class ReservationsDAO{
             const reservationDoc = {
                 first_name: first_name,
                 last_name: last_name,
-                phoneNum: phoneNum,
+                phoneNum: phoneNumber,
                 email: email,
                 date: new Date(date),
                 guestNum: guestNum

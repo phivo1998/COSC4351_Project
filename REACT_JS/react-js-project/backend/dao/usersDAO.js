@@ -64,5 +64,27 @@ export default class UsersDAO {
         return {userList:[], totalUsers:0}
       }
     }
+
+    static async addUser(first_name, last_name, phoneNumber,
+      email,
+      password){
+
+      try{
+          //collection input key values
+          const userDoc = {
+              first_name: first_name,
+              last_name: last_name,
+              phoneNumber: phoneNumber,
+              email: email,
+              password:password
+          }
+
+          return await users.insertOne(userDoc)
+      }catch(e){
+          console.error(`Unable to post user: ${e}`)
+          return {error: e}
+      }
+  }
+
 }
   
