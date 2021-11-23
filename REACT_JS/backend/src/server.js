@@ -10,8 +10,9 @@ app.use(cors());
 
 const withDB = async (operations) => {
     try {
-        const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true});
-        const db = client.db('restaurant');
+        const uri = "mongodb+srv://dev:dev@devcluster.6bqdl.mongodb.net/test?retryWrites=true&w=majority";
+        const client = await MongoClient.connect(uri, { useNewUrlParser: true});
+        const db = client.db('test');
 
         await operations(db);
 
@@ -24,7 +25,7 @@ const withDB = async (operations) => {
 app.post('/api/restaurant', async (req, res) => {
     withDB(async (db) => {
         const body = req.body;
-        const userInfo = await db.collection('authentication').findOne({ username: body.username});
+        const userInfo = await db.collection('users').findOne({ username: body.username});
         console.log(userInfo);
         if(userInfo == null || body.password != userInfo.password) {
             res.status(500).json({ message: 'error' })

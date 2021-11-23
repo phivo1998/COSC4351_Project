@@ -2,10 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 import axios from "axios";
+import http from "../../http-common.js"
 import '../../App.css';
 import './../login.css';
 
-const Login = () => {
+
+
+
+
+const Login = (props) => {
+
+    
+    
 
     let history = useHistory();
     //const [userInfo, setUserInfo] = useState(initialUserState);    
@@ -13,26 +21,38 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     
+    
+    
 
     // Sends user input to backend and checks response
-    const checkUserInfo = async () => {
+    const checkUserInfo = async (event) => {
         console.log(username);
         console.log(password);
-        const result =  {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
-        };
-        const response = await fetch(`http://localhost:8000/api/restaurant`, result);
-        const body = await response.json();
-        console.log(body);
-        if(body.message == "error") {
-            alert("Invalid Entry.");
-            console.log("Invalid Entry.");
-        } else {
-            alert("Success");
-            // console.log(username);
-            history.push(`/dashboard/${username}`);
+        try{
+            //localhost will be replcaed with web hosted url
+            const httpResponse = await http.get(`users?email=${username}`)
+            console.log(`${JSON.stringify(httpResponse)}`)
+            const body = httpResponse
+            
+            if(body.data.total_users === 0 || body.data.users[0].password !== password) {
+                console.log("Invalid Entry");
+                throw new Error('Invalid Entry')
+
+            } else {
+                //props.login(username)
+                alert("Success");
+                //props.history.push(`/dashboard/${body.data.users[0].first_name}`);
+                history.push(`/dashboard/${body.data.users[0].first_name}`);
+            }
+
+            
+            
+
+
+        }catch(e){
+            
+            alert(`Invaild username/password: ${e}`)
+            //window.location = '/login'
         }
 
     }
@@ -40,6 +60,8 @@ const Login = () => {
     // prevents submit refresh
     const handleSubmit = (event) => {
         event.preventDefault();
+        
+
 
         // alert("username:" + username + " password:" + password);
     }
