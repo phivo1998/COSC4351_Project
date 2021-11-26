@@ -22,16 +22,16 @@ export default class UsersDAO {
       //find usernames
       if (filters) {
         console.log(`using filters: ${filters["email"]}`)
-        if("username" in filters){
+        // if("username" in filters){
         
-        query = {$text: { $search: filters["username"]}}
-        // }else if("cuisine" in filters){
-        //   query = {"cuisine": ($eq: filters["cuisine"])}
+        // query = {$text: { $search: filters["username"]}}
+        // // }else if("cuisine" in filters){
+        // //   query = {"cuisine": ($eq: filters["cuisine"])}
+        // // }
         // }
-        }
 
         if("email" in filters){
-          query = {$text: {$search: filters["email"]}}
+          query = {email: filters["email"]}
         }
       }
     

@@ -26,12 +26,15 @@ export default class ReservationsDAO{
           let query 
           //filter through list of reservations
           if (filters) {
-            if("phoneNum" in filters){
-              query = {$text: { $search: filters["phoneNum"]}}
+            if("phoneNumber" in filters){
+              query = {$text: { $search: filters["phoneNumber"]}}
+            }
+            if("email" in filters){
+                query = {email: filters["email"]}
+              }
             // }else if("cuisine" in filters){
             //   query = {"cuisine": ($eq: filters["cuisine"])}
             // }
-            }
           }
         
         //find
@@ -48,12 +51,14 @@ export default class ReservationsDAO{
         }
         //const displayCursor = cursor.limit(100).skip(100*2)
         const displayCursor = cursor
+        
       
         try{
           const reservationsList = await displayCursor.toArray()
+          console.log(`Reservations returned: ${JSON.stringify(reservationsList)}`)
          // const userList_1 = await
           const totalReservations = await reservations.countDocuments(query)
-      
+        
       
           return {reservationsList, totalReservations}
         }catch(e){

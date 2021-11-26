@@ -2,13 +2,18 @@ import ReservationsDAO from "../dao/reservationsDAO.js"
 
 export default class ReservationsCrtl{
     static async apiGetReservations(req, res, next){
-        let filter = {}
-        if(req.query.phoneNum){
-            filter.phonenum = req.query.phoneNum
+        let filters = {}
+        if(req.query.phoneNumber){
+            filters.phonenumber = req.query.phoneNumber
+        }
+
+        if(req.query.email){
+            filters.email = req.query.email
         }
         console.log(`Getting Reservations`)
+        console.log(`Using filters: ${JSON.stringify(filters)}`)
         const {reservationsList, totalReservations} = await ReservationsDAO.getReservations({
-            filter
+            filters
         })
 
         let response = {
