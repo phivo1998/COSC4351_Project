@@ -39,7 +39,7 @@ const Login = (props) => {
                 throw new Error('Invalid Entry')
 
             } else {
-                //props.login(username)
+                props.login(username,body.data.users[0].first_name)
                 alert("Success");
                 //props.history.push(`/dashboard/${body.data.users[0].first_name}`);
                 history.push(`/dashboard/${body.data.users[0].first_name}`);
