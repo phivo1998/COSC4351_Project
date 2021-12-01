@@ -8,6 +8,8 @@ import Login from "./components/pages/login";
 import Dashboard from "./components/pages/dashboard";
 import Confirmation from "./components/pages/confirmation";
 import ThankYou from "./components/pages/thankyou";
+import UserReservation from "./components/pages/userReservation";
+import GuestReservation from "./components/pages/guestReservation";
 
 function App() {
   let [user, setUser] = React.useState(null)
@@ -38,6 +40,7 @@ function App() {
               <Dashboard {...props} user={user} username={userId} />
             )} />
             <Route path='/confirmation/:username' component={Confirmation} />
+            <Route path="/userReservation/:username" component={UserReservation} />
             
           <div>
             <Navbar />
@@ -48,6 +51,7 @@ function App() {
             <Route path='/sign-up' component={SignUp} />
             <Route path='/confirmation' component={Confirmation} />
             <Route path='/thankyou' component={ThankYou} />
+            <Route path="/reservations" component={GuestReservation} />
           </div>
 
         </Switch>

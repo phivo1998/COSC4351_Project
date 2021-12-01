@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 
@@ -74,7 +75,9 @@ class Dashboard extends React.Component {
                 <div>
                     <h1 style={{display: 'flex', justifyContent: 'center'}}> Welcome {this.props.username}!!!</h1>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <Link to={{ pathname: `/userReservation/${this.props.username}`}}>
                         <button type="button" style={{ marginRight: '5px', }} className="btn btn-secondary">Booking</button>
+                        </Link>
                         <button type="button" style={{ marginRight: '5px' }} className="btn btn-secondary">Edit Profile</button>
                         <Link to="/login">
                             <button type="button" className="btn btn-secondary">Logout</button>
