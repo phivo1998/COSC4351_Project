@@ -19,6 +19,22 @@ export default class ReservationsDAO{
 
     }
 
+    static async getReservation(date) {
+        try{
+
+            const reserve = await reservations.findOne({date:date})
+            if (reserve != null) {
+                return true;
+            } else {
+                return false;
+            }
+            console.log(reserve);
+        }
+        catch(e) {
+            console.error(`Unable to establish connection hands in ReservationsDAO: ${e}`)
+        }
+    }
+
     static async getReservations({ 
         filters = null,
         
