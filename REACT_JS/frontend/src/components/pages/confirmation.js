@@ -48,7 +48,7 @@ const Confirmation = () => {
                 phone_number: data.phone_number,
                 email: data.email,
                 guestNum: data.guestNum,
-                date: data.date
+                date: data.date.toString()
 
             })
         }
