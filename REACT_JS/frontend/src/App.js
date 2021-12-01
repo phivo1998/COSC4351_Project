@@ -37,6 +37,8 @@ function App() {
             render={(props) => (
               <Dashboard {...props} user={user} username={userId} />
             )} />
+            <Route path='/confirmation/:username' component={Confirmation} />
+            
           <div>
             <Navbar />
             <Route path='/login'
