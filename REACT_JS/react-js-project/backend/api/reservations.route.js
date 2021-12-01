@@ -9,4 +9,5 @@ router.route("/reservations")
 .put(ReservationsCrtl.apiUpdateReservation)
 .delete(ReservationsCrtl.apiDeleteReservation)
 
+router.route('/reservationCheck').post(ReservationsCrtl.apiCheckReservation)
 export default router
