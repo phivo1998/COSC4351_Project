@@ -39,19 +39,20 @@ function App() {
             render={(props) => (
               <Dashboard {...props} user={user} username={userId} />
             )} />
-            <Route path='/confirmation/:username' component={Confirmation} />
-            <Route path="/userReservation/:username" component={UserReservation} />
-            
+          <Route path="/userReservation/:username" component={UserReservation} />
+          <Route path='/confirmation/:username' component={Confirmation} />
+          <Route path='/thankyou/:username' component={ThankYou} />
+
           <div>
             <Navbar />
             <Route path='/login'
               render={(props) => (
                 <Login {...props} login={login} />
               )} />
-            <Route path='/sign-up' component={SignUp} />
-            <Route path='/confirmation' component={Confirmation} />
+            <Route exact path='/sign-up' component={SignUp} />
+            <Route exact path='/confirmation' component={Confirmation} />
             <Route path='/thankyou' component={ThankYou} />
-            <Route path="/reservations" component={GuestReservation} />
+            <Route exact path="/reservations" component={GuestReservation} />
           </div>
 
         </Switch>

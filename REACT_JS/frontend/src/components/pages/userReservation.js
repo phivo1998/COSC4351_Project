@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 import http from "../../http-common.js"
 import '../../App.css';
@@ -12,12 +12,13 @@ import './../userReservation.css';
 
 const UserReservation = () => {
     const [date, setDate] = useState(setHours(setMinutes(new Date(), 30), 16));
-    const [username, setUsername] = useState('');
+    //const [username, setUsername] = useState('');
     const [guests, setGuests] = useState('');
     const [password, setPassword] = useState('');
     let history = useHistory();
-    let {user} = useParams();
+    let {username} = useParams();
     let userError = '';
+    console.log(username)
     const checkReservation = async(event) => {
         try{
             const httpResponse = await http.post(`reservationCheck`, {
@@ -63,8 +64,9 @@ const UserReservation = () => {
             </div>
             {console.log(date)}
             <Link to={{
-                pathname: `/confirmation/${user}`,
+                pathname: `/confirmation/${username}`,
                 state: {
+                    
                     guests: guests,
                     date: date
                 }
