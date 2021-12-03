@@ -1,6 +1,20 @@
 import ReservationsDAO from "../dao/reservationsDAO.js"
 
 export default class ReservationsCrtl{
+//grabbing from front end
+    static async apiCheckReservation(req, res, next) {
+        try{
+            const date = req.body.date;
+
+            const userReserveResponse = await ReservationsDAO.getReservation(
+                date
+            )
+            res.json({isPresent: userReserveResponse})
+        } catch(e) {
+
+        }
+    }
+
     static async apiGetReservations(req, res, next){
         let filters = {}
         if(req.query.phoneNumber){
@@ -101,6 +115,8 @@ export default class ReservationsCrtl{
             res.status(500).json({error: e.message})
         }
     }
+    
+
 }
 
 // "first_name":"Test",
