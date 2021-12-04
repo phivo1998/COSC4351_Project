@@ -1,5 +1,5 @@
 # COSC4351_Project
-#To run applcation
+#To run applcation  
 *In ReactJs folder, open terminal into backend folder and frontend folder and run "npm install" in both terminals
 
 *After creating a Mongodb instance, create .env file with mongo application uri as a variable
