@@ -40,14 +40,11 @@ class Dashboard extends React.Component {
     render() {
         const reservation = this.state.reservations.reservations?.map((res, i) => (
 
-
-            <div class="form-check ml-3">
-                <div class="just-padding" key={i}>
-                    <div class="list-group list-group-root well"  >
-
-                        <input class="form-check-input list-group-item" type="checkbox" value="" id="flexCheckDefault" />
+            
+                <div class="list-group list-group-root well"  >
+                        <input class="form-check-input list-group-item" type="checkbox" value="" id="flexCheckDefault" key={i}/>
                         <label class="form-check-label" for="flexCheckDefault">
-                            Reservation #{i}:<br />
+                            Reservation #{i+1}:<br />
                             First Name: {res.first_name}<br />
                             Last Name: {res.last_name}<br />
                             Phone Number: {res.phoneNumber}<br />
@@ -56,10 +53,10 @@ class Dashboard extends React.Component {
                             Reservation Date: {res.date}
                         </label>
 
-                    </div>
-
                 </div>
-            </div>
+
+
+            
 
 
         ))
@@ -85,12 +82,26 @@ class Dashboard extends React.Component {
                     </div>
                     <br></br>
                     <div>
-                        Current Reservation:
+                        Current Reservation: 
+                        
 
 
                     </div>
 
-                    <div>{reservation}</div>
+                    <div>
+                        <div class="form-check ml-3">
+                            <div class="just-padding">
+                                
+                    
+                                {reservation}
+                            </div>
+                            <div>
+                                <button type="button" className="btn btn-secondary" style={{ marginTop: '10px' }}>Cancel</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
                 </div>
             </>
         )

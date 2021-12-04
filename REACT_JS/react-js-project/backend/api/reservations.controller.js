@@ -42,7 +42,7 @@ export default class ReservationsCrtl{
         try{
             const first_name = req.body.first_name
             const last_name = req.body.last_name
-            const phoneNum = req.body.phoneNum
+            const phoneNumber = req.body.phoneNumber
             const email = req.body.email
             const date = req.body.date
             const guestNum = req.body.guestNum
@@ -51,7 +51,7 @@ export default class ReservationsCrtl{
             const ReservationResponse =await ReservationsDAO.addReservation(
                 first_name,
                 last_name,
-                phoneNum,
+                phoneNumber,
                 email,
                 date,
                 guestNum
@@ -68,7 +68,7 @@ export default class ReservationsCrtl{
 
             const first_name = req.body.first_name
             const last_name = req.body.last_name
-            const phoneNum = req.body.phoneNum
+            const phoneNumber = req.body.phoneNumber
             const email = req.body.email
             const date = req.body.date
             const guestNum = req.body.guestNum

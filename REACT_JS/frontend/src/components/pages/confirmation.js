@@ -4,8 +4,8 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 import http from "../../http-common.js"
 
-const Confirmation = () => {
-
+const Confirmation = (props) => {
+    const email = props.user
     const { username } = useParams()
     const location = useLocation()
     const data = location.state
@@ -27,35 +27,46 @@ const Confirmation = () => {
     //         font-size: 24px;
     //         cursor: pointer;
     // `;
-
+    const [res,setRes] = React.useState({})
     const postReservation = async (event) => {
+        
         //localhost will be replcaed with web hosted url
 
         if (username) {
-            console.log("slut")
-            const httpResponse = await http.post(`reservations`, {
-                email: username,
-                guestNum: data.guests,
-                date: data.date
+            console.log(`data for user: ${JSON.stringify(data)}`)
+            const user = await http.get(`/users?email=${email}`)
+            const body = user.data
+                        
+            console.log(`confirmation for ${user.data.users[0].first_name}`)
+           //still working on
+            const httpResponse = await http.post(`/reservations`, {]
+                first_name: body.users[0].first_name
+                
+            //     email: username,
+            //     guestNum: data.guests,
+            //     date: data.date
 
-            })
+            // })
         } else {
-            console.log("SINAISAWHORE")
-            const httpResponse = await http.post(`reservations`, {
-                // need to add these attributes to the backend
-                first_name: data.first_name,
-                last_name: data.last_name,
-                phoneNumber: data.phone_number,
-                email: data.email,
-                guestNum: data.guests,
-                date: data.date.toString()
+            console.log(`data for guest: ${data}`)
+            // const httpResponse = await http.post(`reservations`, {
+            //     // need to add these attributes to the backend
+            //     first_name: data.first_name,
+            //     last_name: data.last_name,
+            //     phoneNumber: data.phone_number,
+            //     email: data.email,
+            //     guestNum: data.guests,
+            //     date: data.date.toString()
 
-            })
+            // })
         }
 
     }
     console.log(data.date)
-
+    React.useEffect(() => {
+        console.log(`user info results: ${res}`)
+        
+    })
 
     return (
         <div>
