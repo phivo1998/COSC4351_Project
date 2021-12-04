@@ -27,7 +27,6 @@ const Confirmation = (props) => {
     //         font-size: 24px;
     //         cursor: pointer;
     // `;
-    const [res,setRes] = React.useState({})
     const postReservation = async (event) => {
         
         //localhost will be replcaed with web hosted url
@@ -50,24 +49,35 @@ const Confirmation = (props) => {
             })
         } else {
             console.log(`data for guest: ${data}`)
-            // const httpResponse = await http.post(`reservations`, {
-            //     // need to add these attributes to the backend
-            //     first_name: data.first_name,
-            //     last_name: data.last_name,
-            //     phoneNumber: data.phone_number,
-            //     email: data.email,
-            //     guestNum: data.guests,
-            //     date: data.date.toString()
+            const httpResponse = await http.post(`/reservations`, {
+                // need to add these attributes to the backend
+                 first_name: data.firstname,
+                 last_name: data.lastname,
+                 phoneNumber: data.phonenumber,
+                 email: data.email,
+                 guestNum: data.guests,
+                 date: data.date.toString()
 
-            // })
+             })
         }
 
     }
-    console.log(data.date)
-    React.useEffect(() => {
-        console.log(`user info results: ${res}`)
-        
-    })
+    const cancelButton= ()=>{
+        if(username){
+            return(
+                <Link to={{pathname: `/dashboard/${username}`}}  >
+                    <button type="button" className="btn btn-secondary">Cancel</button>
+                </Link>
+            )
+            
+        }else{
+            return(
+                <Link to={{pathname: `/`}}  >
+                    <button type="button" className="btn btn-secondary">Cancel</button>
+                </Link>
+            )
+        }
+    }
 
     return (
         <div>
@@ -92,9 +102,9 @@ const Confirmation = (props) => {
                     }}>
                         <button type="button" onClick={() => postReservation()} style={{ marginRight: '5px' }} className="btn btn-primary">Confirm</button>
                     </Link>
-                    <Link to={{ pathname: `/dashboard/${username}` }}>
-                        <button type="button" className="btn btn-secondary">Cancel</button>
-                    </Link>
+                    
+                    {cancelButton()}
+                    
                 </Col>
             </Row>
         </div>

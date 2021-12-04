@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
+import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css'
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
@@ -10,8 +11,10 @@ import '../../App.css';
 import './../login.css';
 import './../userReservation.css';
 
+
+
 const UserReservation = () => {
-    const [date, setDate] = useState(setHours(setMinutes(new Date(), 30), 16));
+    
     //const [username, setUsername] = useState('');
     const [guests, setGuests] = useState('');
     const [password, setPassword] = useState('');
@@ -19,18 +22,31 @@ const UserReservation = () => {
     let {username} = useParams();
     let userError = '';
     console.log(username)
+    
+
+    const [date, setDate] = useState(setHours(setMinutes(new Date(), 30), 16));
+    
     const checkReservation = async(event) => {
         try{
-            const httpResponse = await http.post(`reservationCheck`, {
-                date: date.toString()
-            })
-            console.log(httpResponse)
-            if (httpResponse.data.isPresent == true) {
-                event.preventDefault();
-                userError = 'date present in system'
-            } else {
+            
+            console.log(moment(date).format())
+            const httpRes = await http.get(`/reservations?date=${moment(date).format()}`)
+            const body = httpRes.data
+            console.log(body)
+            for(let i = 0; i < body.length; i++){
                 
             }
+            // const httpResponse = await http.post(`reservationCheck`, {
+            //     date: date.toString()
+            // })
+            // console.log(httpResponse)
+            // if (httpResponse.data.isPresent == true) {
+            //     event.preventDefault();
+            //     userError = 'date present in system'
+            // } else {
+                
+
+            // }
         }
         catch(e) {
 
@@ -38,7 +54,6 @@ const UserReservation = () => {
     }
 
     
-
     return (
         <form className="reserve">
            <div className='form-group row'>
@@ -51,7 +66,8 @@ const UserReservation = () => {
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Pick Date and Time</label>
                 <div>
-                <DatePicker selected={date} onChange={(date) => setDate(date)} 
+                <DatePicker  selected={date} onChange={(date)=> setDate(date)} minDate={moment().toDate()}
+                 
                 showTimeSelect
                 timeFormat="HH:mm"
                 injectTimes={[

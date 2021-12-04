@@ -48,6 +48,13 @@ export default class ReservationsDAO{
             if("email" in filters){
                 query = {email: filters["email"]}
               }
+            
+            if("date" in filters){
+                const today = new Date(filters["date"])
+                const minT = new Date(today.getTime() + 86400000)
+                console.log(`today: ${today} \n TOMORROW: ${minT}`)
+                query = {date: { $gte: today, $lt: minT }}
+            }
             // }else if("cuisine" in filters){
             //   query = {"cuisine": ($eq: filters["cuisine"])}
             // }

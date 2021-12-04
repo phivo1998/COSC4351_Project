@@ -24,6 +24,10 @@ export default class ReservationsCrtl{
         if(req.query.email){
             filters.email = req.query.email
         }
+
+        if(req.query.date){
+            filters.date = req.query.date
+        }
         console.log(`Getting Reservations`)
         console.log(`Using filters: ${JSON.stringify(filters)}`)
         const {reservationsList, totalReservations} = await ReservationsDAO.getReservations({
