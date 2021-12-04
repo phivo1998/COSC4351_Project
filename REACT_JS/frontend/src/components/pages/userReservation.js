@@ -33,9 +33,23 @@ const UserReservation = () => {
             const httpRes = await http.get(`/reservations?date=${moment(date).format()}`)
             const body = httpRes.data
             console.log(body)
-            for(let i = 0; i < body.length; i++){
-                
+            const httpTables = await http.get(`/tables`)
+            const Tbody = httpTables.data
+            var sum = 0
+            console.log(Tbody.tables[0].quantity)
+            for(let i = 0; i < Tbody.tables.length; i++){
+                sum = sum + Number(Tbody.tables[i].quantity)
             }
+            console.log(`total capacity: ${sum}`)
+            for(let x = 0; x < body.reservations.length; x++){
+                sum = sum - body.reservations[x].guestNum
+
+                
+
+            }
+            console.log(`capacity left for the day: ${sum}`)
+            
+
             // const httpResponse = await http.post(`reservationCheck`, {
             //     date: date.toString()
             // })
