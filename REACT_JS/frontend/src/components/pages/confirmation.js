@@ -37,16 +37,17 @@ const Confirmation = (props) => {
             const user = await http.get(`/users?email=${email}`)
             const body = user.data
                         
-            console.log(`confirmation for ${user.data.users[0].first_name}`)
+            console.log(`confirmation for ${user.data.users[0]}`)
            //still working on
-            const httpResponse = await http.post(`/reservations`, {]
-                first_name: body.users[0].first_name
-                
-            //     email: username,
-            //     guestNum: data.guests,
-            //     date: data.date
+            const httpResponse = await http.post(`/reservations`, {
+                first_name: body.users[0].first_name,
+                last_name: body.users[0].last_name,
+                phoneNumber: body.users[0].phoneNumber,
+                email:email,
+                guestNum: data.guests,
+                date: data.date
 
-            // })
+            })
         } else {
             console.log(`data for guest: ${data}`)
             // const httpResponse = await http.post(`reservations`, {

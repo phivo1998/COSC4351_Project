@@ -94,7 +94,7 @@ export default class ReservationsDAO{
             const reservationDoc = {
                 first_name: first_name,
                 last_name: last_name,
-                phoneNum: phoneNumber,
+                phoneNumber: phoneNumber,
                 email: email,
                 date: new Date(date),
                 guestNum: guestNum
