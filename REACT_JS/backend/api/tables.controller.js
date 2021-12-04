@@ -10,7 +10,7 @@ export default class TablesCrtl{
         const {tablesList, totalTables} = await TablesDAO.getTables({
             filter
         })
-
+        console.log(`Returning tables: ${JSON.stringify(tablesList)}`)
         let response = {
             tables: tablesList,
             total_tables:totalTables
